@@ -153,7 +153,7 @@ function json.parse(str, pos, end_delim)
 	if pos > #str then error('Reached unexpected end of input.') end
 	local pos = pos + #str:match('^%s*', pos)	-- Skip whitespace.
 	local first = str:sub(pos, pos)
-	if first == '{' then	-- Parse an object.
+	if first == '{' then  -- Parse an object.
 		local obj, key, delim_found = {}, true, true
 		pos = pos + 1
 		while true do
@@ -164,7 +164,7 @@ function json.parse(str, pos, end_delim)
 			obj[key], pos = json.parse(str, pos)
 			pos, delim_found = skip_delim(str, pos, ',')
 		end
-	elseif first == '[' then	-- Parse an array.
+	elseif first == '[' then  -- Parse an array.
 		local arr, val, delim_found = {}, true, true
 		pos = pos + 1
 		while true do
@@ -174,11 +174,11 @@ function json.parse(str, pos, end_delim)
 			arr[#arr + 1] = val
 			pos, delim_found = skip_delim(str, pos, ',')
 		end
-	elseif first == '"' then	-- Parse a string.
+	elseif first == '"' then  -- Parse a string.
 		return parse_str_val(str, pos + 1)
-	elseif first == '-' or first:match('%d') then	-- Parse a number.
+	elseif first == '-' or first:match('%d') then  -- Parse a number.
 		return parse_num_val(str, pos)
-	elseif first == end_delim then	-- End of an object or array.
+	elseif first == end_delim then  -- End of an object or array.
 		return nil, pos + 1
 	else	-- Parse true, false, or null.
 		local literals = {['true'] = true, ['false'] = false, ['null'] = json.null}
