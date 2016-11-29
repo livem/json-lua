@@ -70,7 +70,7 @@ end
 
 -- Returns pos, did_find; there are two cases:
 -- 1. Delimiter found: pos = pos after leading space + delim; did_find = true.
--- 2. Delimiter not found: pos = pos after leading space;		 did_find = false.
+-- 2. Delimiter not found: pos = pos after leading space; did_find = false.
 -- This throws an error if err_if_missing is true and the delim is not found.
 local function skip_delim(str, pos, delim, err_if_missing)
 	pos = pos + #str:match('^%s*', pos)
@@ -146,7 +146,7 @@ function json.stringify(obj, as_key)
 	return table.concat(s)
 end
 
-json.null = {}	-- This is a one-off table to represent the null value.
+json.null = {}  -- This is a one-off table to represent the null value.
 
 function json.parse(str, pos, end_delim)
 	pos = pos or 1
